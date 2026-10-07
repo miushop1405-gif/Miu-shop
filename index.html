@@ -61,9 +61,7 @@ body{
     transition:.3s;
 }
 
-button,
-input,
-select{
+button,input,select{
     font:inherit;
 }
 
@@ -115,7 +113,7 @@ body.dark header{
 .brand img{
     width:52px;
     height:52px;
-    object-fit:contain;
+    object-fit:cover;
     border-radius:17px;
     box-shadow:0 8px 20px rgba(215,125,155,.15);
 }
@@ -183,42 +181,42 @@ body.dark header{
     min-height:390px;
     border:1px solid var(--line);
     border-radius:34px;
-    background:
-        radial-gradient(circle at 80% 30%,rgba(239,178,197,.30),transparent 28%),
-        linear-gradient(135deg,var(--surface2),var(--surface));
+
+    background-image:
+        linear-gradient(
+            90deg,
+            rgba(255,248,251,.96) 0%,
+            rgba(255,248,251,.86) 42%,
+            rgba(255,248,251,.35) 72%,
+            rgba(255,248,251,.08) 100%
+        ),
+        url("https://uploadkon.ir/uploads/cb7507_26file-0000000044c8820aaff55a75aca024a5.png");
+
+    background-size:cover;
+    background-position:center;
+
     box-shadow:var(--shadow);
-    display:grid;
-    grid-template-columns:1.15fr .85fr;
+
+    display:flex;
     align-items:center;
 }
 
-.hero-card::before,
-.hero-card::after{
-    content:"";
-    position:absolute;
-    border-radius:50%;
-    pointer-events:none;
-}
-
-.hero-card::before{
-    width:220px;
-    height:220px;
-    left:-80px;
-    bottom:-100px;
-    background:rgba(239,178,197,.15);
-}
-
-.hero-card::after{
-    width:130px;
-    height:130px;
-    right:42%;
-    top:-60px;
-    background:rgba(255,218,180,.14);
+body.dark .hero-card{
+    background-image:
+        linear-gradient(
+            90deg,
+            rgba(25,20,24,.97) 0%,
+            rgba(25,20,24,.88) 42%,
+            rgba(25,20,24,.42) 72%,
+            rgba(25,20,24,.12) 100%
+        ),
+        url("https://uploadkon.ir/uploads/cb7507_26file-0000000044c8820aaff55a75aca024a5.png");
 }
 
 .hero-copy{
     position:relative;
     z-index:2;
+    width:58%;
     padding:55px;
 }
 
@@ -228,12 +226,16 @@ body.dark header{
     gap:7px;
     padding:8px 14px;
     border:1px solid var(--line);
-    background:var(--surface);
+    background:rgba(255,255,255,.88);
     color:var(--primary);
     border-radius:100px;
     font-size:12px;
     font-weight:800;
     box-shadow:var(--shadow2);
+}
+
+body.dark .badge{
+    background:rgba(37,30,34,.88);
 }
 
 .hero h1{
@@ -284,28 +286,6 @@ body.dark header{
 
 .hero-btn:hover{
     transform:translateY(-3px);
-}
-
-.hero-logo{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    padding:35px;
-    position:relative;
-    z-index:2;
-}
-
-.hero-logo img{
-    width:min(330px,78%);
-    aspect-ratio:1;
-    object-fit:contain;
-    filter:drop-shadow(0 25px 35px rgba(120,60,80,.18));
-    animation:floatLogo 4s ease-in-out infinite;
-}
-
-@keyframes floatLogo{
-    0%,100%{transform:translateY(0)}
-    50%{transform:translateY(-9px)}
 }
 
 /* ================= SECTION ================= */
@@ -368,45 +348,119 @@ body.dark header{
     box-shadow:0 0 0 4px rgba(239,178,197,.12);
 }
 
-.filters{
-    display:flex;
-    gap:7px;
-    flex-wrap:wrap;
+/* ================= CATEGORIES ACCORDION ================= */
+
+.categories{
+    display:grid;
+    gap:13px;
+    margin-bottom:35px;
 }
 
-.filter{
+.category-box{
     border:1px solid var(--line);
+    border-radius:22px;
     background:var(--surface);
-    color:var(--muted);
-    padding:11px 14px;
-    border-radius:14px;
-    font-weight:600;
-    transition:.2s;
+    overflow:hidden;
+    box-shadow:var(--shadow2);
+    transition:.25s;
 }
 
-.filter:hover{
+.category-box.open{
     border-color:var(--primary2);
+    box-shadow:var(--shadow);
 }
 
-.filter.active{
-    background:var(--primary);
-    color:white;
-    border-color:var(--primary);
+.category-head{
+    width:100%;
+    border:0;
+    background:transparent;
+    color:var(--text);
+    padding:18px 20px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+    text-align:right;
+}
+
+.category-head:hover{
+    background:var(--surface2);
+}
+
+.category-title{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-weight:900;
+    font-size:16px;
+}
+
+.category-icon{
+    width:42px;
+    height:42px;
+    border-radius:14px;
+    display:grid;
+    place-items:center;
+    background:var(--primary3);
+    font-size:21px;
+}
+
+.category-count{
+    color:var(--muted);
+    font-size:11px;
+    font-weight:700;
+}
+
+.category-arrow{
+    width:35px;
+    height:35px;
+    border-radius:12px;
+    display:grid;
+    place-items:center;
+    background:var(--surface2);
+    color:var(--primary);
+    transition:.3s;
+    flex-shrink:0;
+}
+
+.category-box.open .category-arrow{
+    transform:rotate(180deg);
+    background:var(--primary3);
+}
+
+.category-content{
+    display:none;
+    padding:0 15px 17px;
+}
+
+.category-box.open .category-content{
+    display:block;
+    animation:categoryOpen .25s ease;
+}
+
+@keyframes categoryOpen{
+    from{
+        opacity:0;
+        transform:translateY(-7px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.category-products{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
 }
 
 /* ================= PRODUCTS ================= */
 
-.grid{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:19px;
-    padding-bottom:65px;
-}
-
 .card{
     background:var(--surface);
     border:1px solid var(--line);
-    border-radius:23px;
+    border-radius:20px;
     overflow:hidden;
     box-shadow:var(--shadow2);
     transition:.3s;
@@ -430,7 +484,7 @@ body.dark header{
 }
 
 .product-img{
-    height:255px;
+    height:225px;
     position:relative;
     display:flex;
     align-items:center;
@@ -535,10 +589,11 @@ body.dark .stock-pill{
 }
 
 .empty{
-    grid-column:1/-1;
     text-align:center;
-    padding:70px 20px;
+    padding:35px 20px;
     color:var(--muted);
+    border:1px dashed var(--line);
+    border-radius:17px;
 }
 
 /* ================= ABOUT ================= */
@@ -565,6 +620,28 @@ body.dark .stock-pill{
     color:var(--muted);
     line-height:2;
     margin-bottom:0;
+}
+
+.rubika-order{
+    margin-top:20px;
+    padding:17px 18px;
+    border-radius:18px;
+    background:var(--primary3);
+    border:1px solid var(--primary2);
+    color:var(--text);
+    line-height:2;
+}
+
+.rubika-order strong{
+    color:var(--primary);
+}
+
+.rubika-id{
+    direction:ltr;
+    display:inline-block;
+    font-weight:900;
+    color:var(--primary);
+    margin-right:5px;
 }
 
 /* ================= FOOTER ================= */
@@ -789,16 +866,12 @@ body.dark .notice{
 
 @media(max-width:900px){
 
-    .grid{
+    .category-products{
         grid-template-columns:repeat(3,1fr);
     }
 
-    .hero-card{
-        grid-template-columns:1fr;
-    }
-
-    .hero-logo{
-        display:none;
+    .hero-copy{
+        width:68%;
     }
 
     .admin-grid{
@@ -825,29 +898,35 @@ body.dark .notice{
         height:45px;
     }
 
-    .grid{
-        grid-template-columns:repeat(2,1fr);
-        gap:10px;
-    }
-
-    .product-img{
-        height:190px;
-    }
-
-    .info{
-        padding:13px;
-    }
-
-    .info h3{
-        font-size:14px;
-    }
-
     .hero{
         padding-top:24px;
     }
 
+    .hero-card{
+        min-height:470px;
+        background-position:center;
+    }
+
     .hero-copy{
+        width:100%;
         padding:32px 25px;
+        background:linear-gradient(
+            90deg,
+            rgba(255,248,251,.94),
+            rgba(255,248,251,.76)
+        );
+        height:100%;
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+    }
+
+    body.dark .hero-copy{
+        background:linear-gradient(
+            90deg,
+            rgba(25,20,24,.94),
+            rgba(25,20,24,.76)
+        );
     }
 
     .hero h1{
@@ -856,6 +935,23 @@ body.dark .notice{
 
     .section-title h2{
         font-size:23px;
+    }
+
+    .category-products{
+        grid-template-columns:repeat(2,1fr);
+        gap:9px;
+    }
+
+    .product-img{
+        height:185px;
+    }
+
+    .info{
+        padding:13px;
+    }
+
+    .info h3{
+        font-size:14px;
     }
 
     .row{
@@ -869,12 +965,16 @@ body.dark .notice{
     .admin-item .grow{
         min-width:150px;
     }
+
+    .category-head{
+        padding:15px;
+    }
 }
 
 @media(max-width:400px){
 
-    .grid{
-        gap:8px;
+    .category-products{
+        gap:7px;
     }
 
     .product-img{
@@ -889,6 +989,10 @@ body.dark .notice{
         padding:9px 10px;
         font-size:12px;
     }
+
+    .category-title{
+        font-size:14px;
+    }
 }
 </style>
 </head>
@@ -900,8 +1004,14 @@ body.dark .notice{
 <div class="container nav">
 
 <a class="brand" href="#">
-<img src="miushop-logo.jpg" alt="MiuShop">
+
+<img
+src="https://uploadkon.ir/uploads/45cc07_26file-00000000abe482109f3c781b5f75e4fe.png"
+alt="MiuShop"
+>
+
 <span>MiuShop | میو شاپ</span>
+
 </a>
 
 <nav class="navlinks">
@@ -979,15 +1089,6 @@ class="hero-btn secondary"
 
 </div>
 
-<div class="hero-logo">
-
-<img
-src="miushop-logo.jpg"
-alt="لوگوی MiuShop"
->
-
-</div>
-
 </div>
 
 </div>
@@ -1030,17 +1131,12 @@ oninput="renderProducts()"
 
 </div>
 
-<div
-id="filters"
-class="filters"
-></div>
-
 </div>
 
 
 <div
-id="productGrid"
-class="grid"
+id="categories"
+class="categories"
 ></div>
 
 </section>
@@ -1059,9 +1155,22 @@ class="container about"
 
 <p>
 MiuShop مجموعه‌ای برای نمایش اکسسوری‌های خاص و فانتزی است.
-این سایت در حال حاضر برای معرفی و نمایش محصولات طراحی شده
-و خرید آنلاین، سبد خرید و ثبت سفارش در آن وجود ندارد.
+این سایت برای معرفی و نمایش محصولات طراحی شده است.
 </p>
+
+<div class="rubika-order">
+
+📦 <strong>جهت ثبت سفارش:</strong>
+
+برای ثبت سفارش به آیدی روبیکا
+
+<span class="rubika-id">
+Miss_malek_zade
+</span>
+
+مراجعه کنید.
+
+</div>
 
 </div>
 
@@ -1178,7 +1287,10 @@ localStorage.getItem("miushop_products")
 ) || defaultProducts;
 
 
-let activeCategory = "همه";
+let openCategories =
+JSON.parse(
+localStorage.getItem("miushop_open_categories")
+) || [];
 
 
 /* =====================================================
@@ -1218,13 +1330,12 @@ product.price *
 
 
 /* =====================================================
-   دسته‌بندی
+   دسته‌بندی‌ها
 ===================================================== */
 
 function categories(){
 
 return [
-"همه",
 ...new Set(
 products
 .map(p=>p.category)
@@ -1235,82 +1346,58 @@ products
 }
 
 
-/* =====================================================
-   فیلترها
-===================================================== */
+function categoryEmoji(category){
 
-function renderFilters(){
+const icons={
+"اکسسوری مو":"🎀",
+"گردنبند":"💗",
+"دستبند":"✨",
+"گوشواره":"🌸",
+"انگشتر":"💍",
+"کیف":"👜",
+"ساعت":"⌚",
+"زیورآلات":"💎"
+};
 
-document.getElementById("filters").innerHTML =
-
-categories().map(category=>`
-
-<button
-class="filter ${
-category===activeCategory
-?"active":""
-}"
-onclick='
-activeCategory=${JSON.stringify(category)};
-renderFilters();
-renderProducts();
-'
->
-${escapeHtml(category)}
-</button>
-
-`).join("");
+return icons[category] || "🎀";
 
 }
 
 
 /* =====================================================
-   محصولات
+   باز و بسته کردن دسته
 ===================================================== */
 
-function renderProducts(){
+function toggleCategory(category){
 
-const search =
-document
-.getElementById("search")
-.value
-.trim()
-.toLowerCase();
+if(openCategories.includes(category)){
 
-
-const list =
-products.filter(product=>
-
-(
-activeCategory==="همه"
-||
-product.category===activeCategory
-)
-
-&&
-
-(
-!search
-||
-product.name.toLowerCase().includes(search)
-||
-product.category.toLowerCase().includes(search)
-)
-
+openCategories =
+openCategories.filter(
+item=>item!==category
 );
 
+}else{
 
-document.getElementById("countText").textContent =
-`${list.length.toLocaleString("fa-IR")} محصول`;
+openCategories.push(category);
+
+}
+
+localStorage.setItem(
+"miushop_open_categories",
+JSON.stringify(openCategories)
+);
+
+renderProducts();
+
+}
 
 
-document.getElementById("productGrid").innerHTML =
+/* =====================================================
+   کارت محصول
+===================================================== */
 
-list.length
-
-?
-
-list.map(product=>{
+function productCard(product){
 
 const price=finalPrice(product);
 
@@ -1357,7 +1444,6 @@ ${product.discount}% تخفیف
 }
 
 ${image}
-
 
 <div class="stock-pill">
 
@@ -1440,18 +1526,158 @@ product.stock>0
 
 `;
 
-}).join("")
+}
+
+
+/* =====================================================
+   نمایش محصولات
+===================================================== */
+
+function renderProducts(){
+
+const search =
+document
+.getElementById("search")
+.value
+.trim()
+.toLowerCase();
+
+
+const allProducts =
+products.filter(product=>
+
+!search
+
+||
+
+product.name
+.toLowerCase()
+.includes(search)
+
+||
+
+product.category
+.toLowerCase()
+.includes(search)
+
+);
+
+
+document.getElementById("countText").textContent =
+`${allProducts.length.toLocaleString("fa-IR")} محصول`;
+
+
+const cats=categories();
+
+
+if(!cats.length){
+
+document.getElementById("categories").innerHTML=`
+
+<div class="empty">
+
+<div style="font-size:45px;margin-bottom:10px">
+🎀
+</div>
+
+هنوز محصولی اضافه نشده است.
+
+</div>
+
+`;
+
+return;
+
+}
+
+
+document.getElementById("categories").innerHTML =
+
+cats.map(category=>{
+
+const list =
+allProducts.filter(
+product=>product.category===category
+);
+
+const isOpen =
+openCategories.includes(category);
+
+
+return `
+
+<div
+class="category-box ${isOpen?"open":""}"
+>
+
+<button
+class="category-head"
+onclick='toggleCategory(${JSON.stringify(category)})'
+>
+
+<div class="category-title">
+
+<div class="category-icon">
+${categoryEmoji(category)}
+</div>
+
+<div>
+
+<div>
+${escapeHtml(category)}
+</div>
+
+<div class="category-count">
+
+${list.length.toLocaleString("fa-IR")}
+محصول
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="category-arrow">
+⌄
+</div>
+
+</button>
+
+
+<div class="category-content">
+
+${
+list.length
+
+?
+
+`
+<div class="category-products">
+
+${list.map(product=>productCard(product)).join("")}
+
+</div>
+`
 
 :
 
 `
 <div class="empty">
-<div style="font-size:45px;margin-bottom:10px">
-🎀
+محصولی در این دسته پیدا نشد.
 </div>
-محصولی با این مشخصات پیدا نشد.
+`
+
+}
+
 </div>
+
+</div>
+
 `;
+
+}).join("");
 
 }
 
@@ -1988,10 +2214,6 @@ products.unshift(product);
 
 save();
 
-activeCategory="همه";
-
-renderFilters();
-
 renderProducts();
 
 renderAdmin();
@@ -2019,8 +2241,6 @@ product=>product.id!==id
 
 
 save();
-
-renderFilters();
 
 renderProducts();
 
@@ -2261,8 +2481,6 @@ document.getElementById("eImage")
 
 save();
 
-renderFilters();
-
 renderProducts();
 
 renderAdmin();
@@ -2288,8 +2506,6 @@ document
 ===================================================== */
 
 loadTheme();
-
-renderFilters();
 
 renderProducts();
 
