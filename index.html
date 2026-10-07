@@ -179,44 +179,57 @@ body.dark header{
     position:relative;
     overflow:hidden;
     min-height:390px;
-    border:1px solid var(--line);
-    border-radius:34px;
+    border:0;
+    border-radius:30px;
 
-    background-image:
-        linear-gradient(
-            90deg,
-            rgba(255,248,251,.96) 0%,
-            rgba(255,248,251,.86) 42%,
-            rgba(255,248,251,.35) 72%,
-            rgba(255,248,251,.08) 100%
+    background:
+        radial-gradient(
+            circle at 85% 18%,
+            rgba(239,178,197,.55),
+            transparent 28%
         ),
-        url("https://uploadkon.ir/uploads/cb7507_26file-0000000044c8820aaff55a75aca024a5.png");
+        radial-gradient(
+            circle at 15% 85%,
+            rgba(249,220,230,.65),
+            transparent 32%
+        ),
+        linear-gradient(
+            135deg,
+            #ffffff 0%,
+            #fff7fa 48%,
+            #f9dce6 100%
+        );
 
-    background-size:cover;
-    background-position:center;
-
-    box-shadow:var(--shadow);
+    box-shadow:var(--shadow2);
 
     display:flex;
     align-items:center;
 }
 
 body.dark .hero-card{
-    background-image:
-        linear-gradient(
-            90deg,
-            rgba(25,20,24,.97) 0%,
-            rgba(25,20,24,.88) 42%,
-            rgba(25,20,24,.42) 72%,
-            rgba(25,20,24,.12) 100%
+    background:
+        radial-gradient(
+            circle at 85% 18%,
+            rgba(201,121,150,.38),
+            transparent 28%
         ),
-        url("https://uploadkon.ir/uploads/cb7507_26file-0000000044c8820aaff55a75aca024a5.png");
+        radial-gradient(
+            circle at 15% 85%,
+            rgba(73,48,58,.65),
+            transparent 32%
+        ),
+        linear-gradient(
+            135deg,
+            #251e22 0%,
+            #30252b 48%,
+            #49303a 100%
+        );
 }
 
 .hero-copy{
     position:relative;
     z-index:2;
-    width:58%;
+    width:100%;
     padding:55px;
 }
 
@@ -314,7 +327,7 @@ body.dark .badge{
 .tools{
     display:flex;
     gap:10px;
-    margin-bottom:20px;
+    margin-bottom:15px;
     flex-wrap:wrap;
 }
 
@@ -348,114 +361,49 @@ body.dark .badge{
     box-shadow:0 0 0 4px rgba(239,178,197,.12);
 }
 
-/* ================= CATEGORIES ACCORDION ================= */
+/* ================= CATEGORY FILTERS ================= */
 
-.categories{
-    display:grid;
-    gap:13px;
-    margin-bottom:35px;
+.filters{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    flex-wrap:wrap;
+    margin:0 0 24px;
 }
 
-.category-box{
+.filter-btn{
     border:1px solid var(--line);
-    border-radius:22px;
     background:var(--surface);
-    overflow:hidden;
-    box-shadow:var(--shadow2);
-    transition:.25s;
-}
-
-.category-box.open{
-    border-color:var(--primary2);
-    box-shadow:var(--shadow);
-}
-
-.category-head{
-    width:100%;
-    border:0;
-    background:transparent;
-    color:var(--text);
-    padding:18px 20px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:15px;
-    text-align:right;
-}
-
-.category-head:hover{
-    background:var(--surface2);
-}
-
-.category-title{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    font-weight:900;
-    font-size:16px;
-}
-
-.category-icon{
-    width:42px;
-    height:42px;
-    border-radius:14px;
-    display:grid;
-    place-items:center;
-    background:var(--primary3);
-    font-size:21px;
-}
-
-.category-count{
     color:var(--muted);
-    font-size:11px;
-    font-weight:700;
+    padding:10px 15px;
+    border-radius:14px;
+    font-size:12px;
+    font-weight:800;
+    transition:.2s;
 }
 
-.category-arrow{
-    width:35px;
-    height:35px;
-    border-radius:12px;
-    display:grid;
-    place-items:center;
-    background:var(--surface2);
+.filter-btn:hover{
     color:var(--primary);
-    transition:.3s;
-    flex-shrink:0;
+    background:var(--surface2);
+    border-color:var(--primary2);
+    transform:translateY(-1px);
 }
 
-.category-box.open .category-arrow{
-    transform:rotate(180deg);
-    background:var(--primary3);
-}
-
-.category-content{
-    display:none;
-    padding:0 15px 17px;
-}
-
-.category-box.open .category-content{
-    display:block;
-    animation:categoryOpen .25s ease;
-}
-
-@keyframes categoryOpen{
-    from{
-        opacity:0;
-        transform:translateY(-7px);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-}
-
-.category-products{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:15px;
+.filter-btn.active{
+    background:var(--primary);
+    color:#fff;
+    border-color:var(--primary);
+    box-shadow:0 7px 18px rgba(215,125,155,.18);
 }
 
 /* ================= PRODUCTS ================= */
+
+.product-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+    margin-bottom:45px;
+}
 
 .card{
     background:var(--surface);
@@ -866,12 +814,8 @@ body.dark .notice{
 
 @media(max-width:900px){
 
-    .category-products{
+    .product-grid{
         grid-template-columns:repeat(3,1fr);
-    }
-
-    .hero-copy{
-        width:68%;
     }
 
     .admin-grid{
@@ -904,29 +848,14 @@ body.dark .notice{
 
     .hero-card{
         min-height:470px;
-        background-position:center;
     }
 
     .hero-copy{
         width:100%;
         padding:32px 25px;
-        background:linear-gradient(
-            90deg,
-            rgba(255,248,251,.94),
-            rgba(255,248,251,.76)
-        );
-        height:100%;
         display:flex;
         flex-direction:column;
         justify-content:center;
-    }
-
-    body.dark .hero-copy{
-        background:linear-gradient(
-            90deg,
-            rgba(25,20,24,.94),
-            rgba(25,20,24,.76)
-        );
     }
 
     .hero h1{
@@ -937,7 +866,7 @@ body.dark .notice{
         font-size:23px;
     }
 
-    .category-products{
+    .product-grid{
         grid-template-columns:repeat(2,1fr);
         gap:9px;
     }
@@ -966,14 +895,14 @@ body.dark .notice{
         min-width:150px;
     }
 
-    .category-head{
-        padding:15px;
+    .filter-btn{
+        padding:9px 12px;
     }
 }
 
 @media(max-width:400px){
 
-    .category-products{
+    .product-grid{
         gap:7px;
     }
 
@@ -990,8 +919,9 @@ body.dark .notice{
         font-size:12px;
     }
 
-    .category-title{
-        font-size:14px;
+    .filter-btn{
+        font-size:11px;
+        padding:8px 10px;
     }
 }
 </style>
@@ -1134,9 +1064,17 @@ oninput="renderProducts()"
 </div>
 
 
+<!-- دسته‌بندی‌ها فقط فیلتر هستند -->
 <div
-id="categories"
-class="categories"
+id="filters"
+class="filters"
+></div>
+
+
+<!-- همه محصولات در یک گرید -->
+<div
+id="productGrid"
+class="product-grid"
 ></div>
 
 </section>
@@ -1287,10 +1225,11 @@ localStorage.getItem("miushop_products")
 ) || defaultProducts;
 
 
-let openCategories =
-JSON.parse(
-localStorage.getItem("miushop_open_categories")
-) || [];
+/* =====================================================
+   دسته انتخاب شده
+===================================================== */
+
+let activeCategory = "همه";
 
 
 /* =====================================================
@@ -1342,53 +1281,6 @@ products
 .filter(Boolean)
 )
 ];
-
-}
-
-
-function categoryEmoji(category){
-
-const icons={
-"اکسسوری مو":"🎀",
-"گردنبند":"💗",
-"دستبند":"✨",
-"گوشواره":"🌸",
-"انگشتر":"💍",
-"کیف":"👜",
-"ساعت":"⌚",
-"زیورآلات":"💎"
-};
-
-return icons[category] || "🎀";
-
-}
-
-
-/* =====================================================
-   باز و بسته کردن دسته
-===================================================== */
-
-function toggleCategory(category){
-
-if(openCategories.includes(category)){
-
-openCategories =
-openCategories.filter(
-item=>item!==category
-);
-
-}else{
-
-openCategories.push(category);
-
-}
-
-localStorage.setItem(
-"miushop_open_categories",
-JSON.stringify(openCategories)
-);
-
-renderProducts();
 
 }
 
@@ -1530,6 +1422,73 @@ product.stock>0
 
 
 /* =====================================================
+   نمایش فیلترها
+===================================================== */
+
+function renderFilters(){
+
+const filters =
+document.getElementById("filters");
+
+if(!filters)return;
+
+
+const cats = categories();
+
+if(!cats.length){
+
+filters.innerHTML = "";
+
+return;
+
+}
+
+
+const allCategories = [
+"همه",
+...cats
+];
+
+
+if(!allCategories.includes(activeCategory)){
+
+activeCategory="همه";
+
+}
+
+
+filters.innerHTML =
+allCategories.map(category=>`
+
+<button
+type="button"
+class="filter-btn ${
+activeCategory===category ? "active" : ""
+}"
+onclick='setCategory(${JSON.stringify(category)})'
+>
+${escapeHtml(category)}
+</button>
+
+`).join("");
+
+}
+
+
+/* =====================================================
+   انتخاب دسته
+===================================================== */
+
+function setCategory(category){
+
+activeCategory=category;
+
+renderProducts();
+
+}
+
+
+/* =====================================================
    نمایش محصولات
 ===================================================== */
 
@@ -1543,28 +1502,12 @@ document
 .toLowerCase();
 
 
-const allProducts =
-products.filter(product=>
-
-!search
-
-||
-
-product.name
-.toLowerCase()
-.includes(search)
-
-||
-
-product.category
-.toLowerCase()
-.includes(search)
-
-);
+const grid =
+document.getElementById("productGrid");
 
 
-document.getElementById("countText").textContent =
-`${allProducts.length.toLocaleString("fa-IR")} محصول`;
+const countText =
+document.getElementById("countText");
 
 
 const cats=categories();
@@ -1572,9 +1515,16 @@ const cats=categories();
 
 if(!cats.length){
 
-document.getElementById("categories").innerHTML=`
+countText.textContent="0 محصول";
 
-<div class="empty">
+renderFilters();
+
+grid.innerHTML=`
+
+<div
+class="empty"
+style="grid-column:1/-1"
+>
 
 <div style="font-size:45px;margin-bottom:10px">
 🎀
@@ -1591,93 +1541,67 @@ return;
 }
 
 
-document.getElementById("categories").innerHTML =
+const filteredProducts =
+products.filter(product=>{
 
-cats.map(category=>{
+const matchesSearch =
+!search
+||
+product.name
+.toLowerCase()
+.includes(search)
+||
+String(product.category||"")
+.toLowerCase()
+.includes(search);
 
-const list =
-allProducts.filter(
-product=>product.category===category
-);
 
-const isOpen =
-openCategories.includes(category);
+const matchesCategory =
+activeCategory==="همه"
+||
+product.category===activeCategory;
 
 
-return `
+return matchesSearch && matchesCategory;
+
+});
+
+
+countText.textContent =
+`${filteredProducts.length.toLocaleString("fa-IR")} محصول`;
+
+
+renderFilters();
+
+
+if(!filteredProducts.length){
+
+grid.innerHTML=`
 
 <div
-class="category-box ${isOpen?"open":""}"
+class="empty"
+style="grid-column:1/-1"
 >
 
-<button
-class="category-head"
-onclick='toggleCategory(${JSON.stringify(category)})'
->
-
-<div class="category-title">
-
-<div class="category-icon">
-${categoryEmoji(category)}
+<div style="font-size:40px;margin-bottom:10px">
+🔎
 </div>
 
-<div>
-
-<div>
-${escapeHtml(category)}
-</div>
-
-<div class="category-count">
-
-${list.length.toLocaleString("fa-IR")}
-محصول
-
-</div>
-
-</div>
-
-</div>
-
-
-<div class="category-arrow">
-⌄
-</div>
-
-</button>
-
-
-<div class="category-content">
-
-${
-list.length
-
-?
-
-`
-<div class="category-products">
-
-${list.map(product=>productCard(product)).join("")}
-
-</div>
-`
-
-:
-
-`
-<div class="empty">
-محصولی در این دسته پیدا نشد.
-</div>
-`
-
-}
-
-</div>
+محصولی با این مشخصات پیدا نشد.
 
 </div>
 
 `;
 
-}).join("");
+return;
+
+}
+
+
+grid.innerHTML =
+filteredProducts
+.map(product=>productCard(product))
+.join("");
 
 }
 
@@ -2238,7 +2162,6 @@ products=
 products.filter(
 product=>product.id!==id
 );
-
 
 save();
 
